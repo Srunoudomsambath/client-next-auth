@@ -6,7 +6,9 @@ declare module "next-auth" {
     user: {
       id: string;
       roles?: string[];
+      username?: string;
     } & DefaultSession["user"];
+
   }
 
   interface User {
@@ -21,4 +23,33 @@ declare module "next-auth/jwt" {
     idToken?: string;
     roles?: string[];
   }
+}
+type TokenRequestContext = {
+  params: {
+    code?: string;
+  };
+  provider: {
+    clientId?: string;
+    clientSecret?: string;
+    token?: {
+      url?: string;
+    };
+  };
+  checks: {
+    code_verifier?: string;
+  };
+};
+
+
+// User info from Spring Authorization Server
+export interface SpringUserInfo {
+  sub: string; // This is the uuid
+  email: string;
+  name: string;
+  family_name?: string;
+  given_name?: string;
+  username?: string;
+  uuid?: string;
+  roles?: string[];
+  picture?: string;
 }

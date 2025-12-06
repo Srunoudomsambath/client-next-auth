@@ -1,4 +1,5 @@
 "use client";
+
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -28,7 +29,6 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gray-50 p-8">
       <div className="max-w-4xl mx-auto">
-        
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
@@ -52,9 +52,7 @@ export default function DashboardPage() {
               <p className="text-sm font-semibold text-gray-500 uppercase">
                 Email
               </p>
-              <p className="text-lg text-gray-900 mt-1">
-                {session.user.email}
-              </p>
+              <p className="text-lg text-gray-900 mt-1">{session.user.email}</p>
             </div>
 
             <hr />
@@ -90,19 +88,42 @@ export default function DashboardPage() {
               </div>
             )}
           </div>
+
+          {/* View Products Button */}
+          <div className="mt-6">
+            <button
+              onClick={() => router.push("/product")}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2"
+            >
+              View Products
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
 
-        {/* Access Token (for API calls) */}
+        {/* Access Token Info */}
         <div className="mt-6 bg-gray-900 rounded-xl p-6 text-white">
           <h3 className="font-semibold mb-2">Access Token Available</h3>
           <p className="text-sm text-gray-400">
-            Token stored in session: {session.accessToken ? '✅' : '❌'}
+            Token stored in session: {session.accessToken ? "✅" : "❌"}
           </p>
           <p className="text-xs text-gray-500 mt-2">
             Use session.accessToken for API calls
           </p>
         </div>
-
       </div>
     </div>
   );
